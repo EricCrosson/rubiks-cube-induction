@@ -2,8 +2,6 @@
 require 'rubiks_cube'
 require 'yaml'
 
-# TODO: consider making not-random? Sequentially exhaust all scrambles with BFS
-
 VALID_MOVES    = %w(U D L R F B M U' D' L' R' F' B' M').freeze
 INVERSE        = %{'}.freeze
 MOVE_SEPARATOR = %{ }.freeze
@@ -24,7 +22,6 @@ def move_sequence(length)
   # Prevent sequences of zero length
   length = 1 if length.zero?
   last_move = nil
-  # FIXME: why you no work, Object#tap ?
   str = String.new
   length.times do
     # Don't move back and forth forever
@@ -59,7 +56,6 @@ puts "Starting off adding to the #{attempted_trials.size} existing recorded scra
 successful_scrambles = 0
 begin
   NUMBER_OF_TRIALS.times do
-    # FIXME: clean up
     scramble = move_sequence(max_sequence_length)
     need_to_increase_max_sequence_length = 0
     while attempted_trials.has_key? scramble
@@ -71,7 +67,6 @@ begin
       scramble = move_sequence(max_sequence_length)
     end
     puts "Detected new scramble: #{scramble}"
-    # TODO: incorporate timeout, means we've found counterexample
     repeats_until_solved = repeat_sequence_until_solved(scramble)
     puts "  iterations until solved: #{repeats_until_solved}"
     puts
