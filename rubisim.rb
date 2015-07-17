@@ -25,7 +25,8 @@ loop do
   puts "Starting trials of length #{length}"
   sequences = sequences_of_length(length)
   sequences.each do |seq|
-    reps = repeat_sequence_until_solved(seq.join(' '))
-    puts "Sequence #{seq} took #{reps} repetitions to reset"
+    sequence = seq.join(' ')
+    reps = repeat_sequence_until_solved(sequence)
+    puts "Sequence #{sequence} took #{reps} repetitions to reset"
   end
 end
