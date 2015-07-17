@@ -15,8 +15,7 @@ def repeat_sequence_until_solved(sequence)
     cube.perform! sequence
     repetitions += 1
   end
-  repetitions # return number of times to perform sequence until cube
-  # is in solved state
+  repetitions
 end
 
 length = 0
