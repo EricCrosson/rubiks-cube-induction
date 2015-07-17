@@ -20,15 +20,12 @@ end
 
 length = 0
 
-begin
-  loop do
-    length += 1
-    puts "Starting trials of length #{length}"
-    sequences = sequences_of_length(length)
-    sequences.each do |seq|
-      reps = repeat_sequence_until_solved(seq.join(' '))
-      puts "Sequence #{seq} took #{reps} repetitions to reset"
-    end
+loop do
+  length += 1
+  puts "Starting trials of length #{length}"
+  sequences = sequences_of_length(length)
+  sequences.each do |seq|
+    reps = repeat_sequence_until_solved(seq.join(' '))
+    puts "Sequence #{seq} took #{reps} repetitions to reset"
   end
-rescue Interrupt, SystemExit
 end
