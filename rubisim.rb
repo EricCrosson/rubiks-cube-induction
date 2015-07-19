@@ -1,12 +1,18 @@
 #!/usr/bin/env ruby
 require 'rubiks_cube'
 
+# Returns a list of all possible input sequences
+# Params:
+# +length+:: length of each sequence to return
 def sequences_of_length(length)
   %w(U D L R F B U' D' L' R' F' B').combination(length).to_a.reject do |sequence|
     sequence.each_cons(2).any? { |a,b| a == b.sub("'",'') or b == a.sub("'",'') }
   end
 end
 
+# Returns the number of times SEQUENCE must be input on a rubik's cube before
+# the cube returns to its solved state
+# +sequence+:: sequence to repeatedly input on the rubik's cube
 def repeat_sequence_until_solved(sequence)
   cube = RubiksCube::Cube.new
   cube.perform! sequence
