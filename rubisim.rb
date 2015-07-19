@@ -1,12 +1,15 @@
 #!/usr/bin/env ruby
 require 'rubiks_cube'
 
+VALID_INPUT = %w(U D L R F B U' D' L' R' F' B')
 # Returns a list of all possible input sequences
 # Params:
 # +length+:: length of each sequence to return
 def sequences_of_length(length)
-  %w(U D L R F B U' D' L' R' F' B').combination(length).to_a.reject do |sequence|
-    sequence.each_cons(2).any? { |a,b| a == b.sub("'",'') or b == a.sub("'",'') }
+  VALID_INPUT.combination(length).to_a.reject do |sequence|
+    sequence.each_cons(2).any? do |a, b|
+      a == b.sub("'", '') || b == a.sub("'", '')
+    end
   end
 end
 
@@ -17,7 +20,7 @@ def repeat_sequence_until_solved(sequence)
   cube = RubiksCube::Cube.new
   cube.perform! sequence
   repetitions = 1
-  while !cube.solved?
+  until cube.solved?
     cube.perform! sequence
     repetitions += 1
   end
